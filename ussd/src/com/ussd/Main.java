@@ -5,86 +5,62 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		Integer option;
-		while(true){
 		
-			System.out.print("\033[H\033[2J");
-			System.out.flush();
-			System.out.println("0:Sh20 (30mins, 3hrs)");
-			System.out.println("1:Sh10 (15Mins, 1hr)");
-			System.out.println("2:Sh20 (15Mins, midnight)");
-			System.out.println("3:Okoa 50");
-			System.out.println("4:Okoa 20");
-			System.out.println("5:Okoa 10");
-			System.out.println("6:Okoa 5");
-			System.out.println("7:Okoa 20");
-			System.out.println("8:Okoa Internet");
-			System.out.println("98:More");
+		
+		Menu menu0 = new Menu();
+		menu0.id = 0;
+		menu0.childMenu = 1;
+		menu0.offers = new OkoaOffer[8];
+		
+		menu0.offers[0] = new OkoaOffer(0,"SPECIAL","MINUTES",30,3.0,20);
+		menu0.offers[0] = new OkoaOffer(1,"SPECIAL","MINUTES",15,1.0,10);
+		menu0.offers[0] = new OkoaOffer(2,"SPECIAL","MINUTES",15,12.0,20);
+		menu0.offers[0] = new OkoaOffer(3,"NORMAL","AIRTIME",50,72.0,50);
+		menu0.offers[0] = new OkoaOffer(3,"NORMAL","AIRTIME",20,72.0,20);
+		menu0.offers[0] = new OkoaOffer(3,"NORMAL","AIRTIME",10,72.0,10);
+		menu0.offers[0] = new OkoaOffer(3,"NORMAL","AIRTIME",5,3.0,5);
+		menu0.offers[0] = new OkoaOffer(3,"NORMAL","DATA",900,1.0,20);
+		
+		printMenuOffers(menu0);
+	
+	}
+	
+	
+	static void printMenuOffers(Menu menu){
+		for(int i = 0 ; i< menu.offers.length ; i++){
 			
-			option = new Integer(scanner.nextLine());
-			
-			switch(option){
-			
-			case 0:
+			if(menu.offers[i].type.equals("SPECIAL")){
 				
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
-				System.out.println("Existing Unpaid Okoa: 0");
-				System.out.println("New Okoa request: 20");
-				System.out.println("TOTAL DEBT will be: 20");
-				System.out.println("1:Accept");
-				System.out.println("2:Decline");
-				System.out.println("0:BACK 00:HOME");
-				option = new Integer(scanner.nextLine());
-				switch (option){
-				case 0:
-					break;
-				
-				default :
-					System.out.println();
-					
-					
+				if(menu.offers[i].commodity.equals("MINUTES")){
+					System.out.printf("%d:Sh%d (%dmins, %.0fhrs)",menu.offers[i].id,menu.offers[i].cost,menu.offers[i].value,menu.offers[i].duration);
+				}			
+			}
+			
+			else{
+				if(menu.offers[i].commodity.equals("MINUTES")){
+					System.out.printf("%d:Sh%d (%dmins, %dhrs)",menu.offers[i].id,menu.offers[i].cost,menu.offers[i].value,menu.offers[i].duration);
 				}
-				break;
-			
-			case 1:
 				
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
-				System.out.println("Existing Unpaid Okoa: 0");
-				System.out.println("New Okoa request: 10");
-				System.out.println("TOTAL DEBT will be: 10");
-				System.out.println("1:Accept");
-				System.out.println("2:Decline");
-				System.out.println("0:BACK 00:HOME");
-				option = new Integer(scanner.nextLine());
-				break;
-				
-			case 2:
-				
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
-				System.out.println("Existing Unpaid Okoa: 0");
-				System.out.println("New Okoa request: 20");
-				System.out.println("TOTAL DEBT will be: 20");
-				System.out.println("1:Accept");
-				System.out.println("2:Decline");
-				System.out.println("0:BACK 00:HOME");
-				option = new Integer(scanner.nextLine());
-				
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 98:
-				
+				else if(menu.offers[i].commodity.equals("AIRTIME")){
+					System.out.printf("%d:Okoa %d",menu.offers[i].id,menu.offers[i].value);
+				}
+				else if(menu.offers[i].commodity.equals("DATA")){
+					System.out.printf("%d:Okoa %d (%dMB, %.0fhr)",menu.offers[i].id,menu.offers[i].cost,menu.offers[i].value,menu.offers[i].duration);
+				}
 				
 			}
-		
+			
 		}
+	}
+	
+	
+	static void printConfirmation(OkoaOffer offer){
+		System.out.println("Existing Unpaid Okoa: 0");
+		System.out.println("New Okoa request: "+ offer.cost);
+		System.out.println("TOTAL DEBT will be: "+ offer.cost);
+		System.out.println("1:Accept");
+		System.out.println("2:Decline");
+		System.out.println("0:BACK 00:HOME");
 	}
 
 }

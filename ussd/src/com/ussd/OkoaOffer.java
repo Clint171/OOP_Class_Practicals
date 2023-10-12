@@ -3,15 +3,17 @@ package com.ussd;
 public class OkoaOffer {
 	
 	Integer id;
-	Type type;
-	Commodity commodity;
+	String type;
+	String commodity;
+	Integer value;
 	Double duration;
 	Integer cost;
 	
 	public OkoaOffer(
 			Integer id,
-			Type type,
-			Commodity commodity,
+			String type,
+			String commodity,
+			Integer value,
 			Double duration,
 			Integer cost
 					){
@@ -19,6 +21,7 @@ public class OkoaOffer {
 		this.id = id;
 		this.type = type;
 		this.commodity = commodity;
+		this.value = value;
 		this.duration = duration;
 		this.cost = cost;
 		
@@ -26,10 +29,10 @@ public class OkoaOffer {
 	Integer getId(){
 		return this.id;
 	}
-	Type getType(){
+	String getType(){
 		return this.type;
 	}
-	Commodity getCommodity(){
+	String getCommodity(){
 		return this.commodity;
 	}
 	Double getDuration(){

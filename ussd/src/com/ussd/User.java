@@ -13,18 +13,17 @@ public class User {
 			Integer id,
 			List<OkoaOffer> okoaOffers
 			
-				){
+			){
 		this.id = id;
 		this.okoaOffers = okoaOffers;
-		this.debt = setDebt(okoaOffers);
+		setDebt(okoaOffers);
 		
 	}
-	Integer setDebt(List<OkoaOffer> offers){
-		Integer debt = 0;
+	void setDebt(List<OkoaOffer> offers){
+		this.debt = 0;
 		offers.forEach(offer->{
-			debt += offer.cost;
+			this.debt += offer.cost;
 		});
-		return debt;
 	}
 	
 }
