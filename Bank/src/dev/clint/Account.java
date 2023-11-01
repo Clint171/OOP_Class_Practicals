@@ -31,12 +31,25 @@ class SavingsAccount extends BankAccount {
 	public SavingsAccount(int acNo, String acName, String acPhone, String acEmail, double AcBal) {
 		super(acNo, acName, acPhone, acEmail,AcBal);
 	}
-	
+	public void deposit(double amount) {
+		amount += 0.02*amount;
+		AcBal += amount;
+		System.out.println("Bonus: " + (0.02*amount));
+		System.out.println("Deposited: $" + amount);
+	}
+	// 4% withdrawal
+	public void withdrawal(double amount){
+		AcBal -= amount + (0.04*amount);
+	}
 }
 
 class CurrentAccount extends BankAccount {
 	public CurrentAccount(int acNo, String acName, String acPhone, String acEmail, double AcBal) {
 		super(acNo, acName, acPhone, acEmail,AcBal);
+	}
+	// 2.5 % withdrawal
+	public withdrawal(double amount){
+		AcBal -= amount + (0.025*amount);
 	}
 }
 public class Account {
