@@ -12,10 +12,20 @@ public class Account {
 		System.out.println("");
 		System.out.println("");
 		System.out.println("CURRENT ACCOUNT DETAILS");
-		CurrentAccount current = new CurrentAccount(1001,"Peter Smith", "08100000","admin@gmail.com",0.0);
+		CurrentAccount current = new CurrentAccount(1002,"Peter Smith", "08100000","admin@gmail.com",0.0);
 		current.accountholder();
 		current.deposit(500);
 		current.displayBalance();
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Transferring $300 to current account.");
+		sac.transferFunds(300, current);
+		System.out.println("");
+		System.out.println("");
+		sac.displayBalance();
+		current.displayBalance();
+		
+		
 	}
 
 }

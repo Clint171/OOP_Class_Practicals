@@ -19,6 +19,11 @@ public class BankAccount {
 			System.out.println("Account Holder Balance: "+AcBal);
 		}
 		
+		public <T> void transferFunds(double amount , T account){
+			this.AcBal -= amount;
+			((BankAccount) account).deposit(amount);
+		}
+		
 		public void deposit(double amount) {
 			AcBal += amount;
 			System.out.println("Deposited: $" + amount);
