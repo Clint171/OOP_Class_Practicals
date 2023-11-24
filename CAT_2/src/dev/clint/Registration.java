@@ -4,12 +4,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 
 public class Registration {
@@ -130,7 +135,46 @@ public class Registration {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String name = textField.getText();
+				String username = textField_1.getText();
+				String password = String.valueOf(pwdPassword.getPassword());
+				String confirm = String.valueOf(pwdConfirm.getPassword());
+				String email = textField_4.getText();
+				String phone = textField_5.getText();
+				String address = textField_6.getText();
 				
+				if(password.equals(confirm)){
+					try{
+						Class.forName("com.mysql.cj.jdbc.Driver"); 
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cat2" , "root" , "ClintSimiyu004@mysql");
+						String sql = "INSERT INTO Registration (Name, Username, Password, Email, Phone, Address) VALUES (?, ?, ?, ?, ?, ?)";
+						PreparedStatement preparedStatement = con.prepareStatement(sql);
+						preparedStatement.setString(1, name);
+						preparedStatement.setString(2, username);
+						preparedStatement.setString(3, password);
+						preparedStatement.setString(4, email);
+						preparedStatement.setString(5, phone);
+						preparedStatement.setString(6, address);
+						preparedStatement.executeUpdate();
+						preparedStatement.close();
+						con.close();
+						textField.setText("");
+						textField_1.setText("");
+						pwdPassword.setText("");
+						pwdConfirm.setText("");
+						textField_4.setText("");
+						textField_5.setText("");
+						textField_6.setText("");
+						JOptionPane.showMessageDialog(null, "User added!");
+						
+					}
+					catch(Exception err){
+						err.printStackTrace();
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Password and confirmation do not match!");
+				}
 			}
 		});
 		btnSubmit.setBounds(181, 402, 90, 29);
